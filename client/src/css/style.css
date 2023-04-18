@@ -24,3 +24,7 @@
 #home-img:hover::before {
     opacity: 1;
 }
+
+#main-nav {
+    color: white;
+}
