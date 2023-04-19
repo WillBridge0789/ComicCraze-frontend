@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 
 function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-subtle" id="top-nav">
+    <nav className="navbar navbar-expand-lg bg-subtle bg-dark" id="top-nav">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           <img
@@ -34,6 +34,12 @@ function NavBar() {
             </Link>
             <Link to="/favorites" className="nav-link">
               Favorites
+            </Link>
+            <Link to="/register" className="nav-link">
+              Sign Up!
+            </Link>
+            <Link to="/login" className="nav-link" id="login">
+              Login
             </Link>
           </div>
         </div>

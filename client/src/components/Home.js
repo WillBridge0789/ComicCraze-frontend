@@ -3,8 +3,7 @@ function Home() {
     <div>
       <img
         src="./marvel_display_img4.jpg"
-        className="mh-full"
-        id="home-img"
+        className="mh-full gradient-overlay"
         alt="..."
       ></img>
     </div>
