@@ -25,7 +25,11 @@
     opacity: 1;
 }
 
-.navbar-nav .collapse .nav_link {
+.navbar {
+    background-color: #212529;
+}
+
+.navbar-nav .nav-link {
     color: white;
 }
 
@@ -49,4 +53,8 @@
     background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
     /* Set the background to a linear gradient that fades from transparent to a semi-transparent black color */
 }
-  
+
+#log_in {
+    color:white;
+    background-color: #212529;
+}

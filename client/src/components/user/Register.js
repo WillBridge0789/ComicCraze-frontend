@@ -27,7 +27,7 @@ const Register = () => {
   return (
     <>
       <NavBar />
-      <div className="container">
+      <div className="container mx-auto text-center">
         <div className="c-form">
           <form onSubmit={handleRegister}>
             <div>

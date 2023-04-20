@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
+import axios from "axios";
 
 function Comics() {
   const [comics, setComics] = useState([]);
   useEffect(() => {
     fetch(
-      "https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us94.gitpod.io/comics/"
+      "https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/comics/" //may need a new port link per project reload
     )
       .then((response) => response.json())
       .then((data) => {

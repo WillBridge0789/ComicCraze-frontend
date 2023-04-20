@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../../context/GlobalState";
 import jwtDecode from "jwt-decode";
 import NavBar from "../NavBar";
+import Profile from "./Profile";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -22,14 +23,15 @@ const Login = () => {
         currentUserToken: resp.access,
         currentUser: data,
       });
-      navigate("/profile");
+      navigate(<Profile />);
     });
   };
 
   return (
     <>
       <NavBar />
-      <div className="container mx-auto text-center">
+      <div className="container mx-auto text-center" id="log_in">
+        <h3>Login</h3>
         <div className="c-form">
           <form onSubmit={handleLogin}>
             <div>
@@ -43,7 +45,7 @@ const Login = () => {
               />
             </div>
             <div>
-              <label htmlFor="pass">Password</label>
+              <label htmlFor="pass">Password:</label>
               <input
                 type="password"
                 id="pass"
