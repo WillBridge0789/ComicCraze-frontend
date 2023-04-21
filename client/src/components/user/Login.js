@@ -23,14 +23,14 @@ const Login = () => {
         currentUserToken: resp.access,
         currentUser: data,
       });
-      navigate(<Profile />);
+      navigate("/profile");
     });
   };
 
   return (
     <>
       <NavBar />
-      <div className="container mx-auto text-center" id="log_in">
+      <div className="container mx-auto text-center p-3" id="log_in">
         <h3>Login</h3>
         <div className="c-form">
           <form onSubmit={handleLogin}>

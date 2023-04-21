@@ -1,15 +1,19 @@
-#home-img {
+.hero-image {
+    z-index: -1;
+}
+
+.hero-image {
     position: relative;
     display: inline-block;
 }
 
-#home-img {
+.hero-image {
     display: block;
     width: 100%;
     height: auto;
 }
 
-#home-img::before {
+.hero-image {
     content: "";
     position: absolute;
     top: 0;
@@ -21,7 +25,7 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-#home-img:hover::before {
+.hero-image {
     opacity: 1;
 }
 
@@ -48,8 +52,8 @@
     position: absolute; /* Set the position to absolute to position the pseudo-element relative to the parent */
     top: 0;
     right: 0;
-    bottom: 0;
-    left: 0;
+    bottom: 50px;
+    left: 20px;
     background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
     /* Set the background to a linear gradient that fades from transparent to a semi-transparent black color */
 }
@@ -58,3 +62,12 @@
     color:white;
     background-color: #212529;
 }
+
+/* body {
+    background-image: {backgroundImg};
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+} */
+  

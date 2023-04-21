@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import axios from "axios";
+// import './css/style.css';
+// import backgroundImg from 'public/marvel_display_img2.jpg';
 
 function Comics() {
   const [comics, setComics] = useState([]);
@@ -39,27 +41,33 @@ function Comics() {
   //   cardContainer.appendChild(card);
   // }
 
-  let renderedComics = comics.slice(0, 20).map((comic) => {
-    return (
-      <div className="col">
-        <div className="card" style={{ width: 18 + "rem" }}>
-          <img src={comic.thumbnail} className="card-img-top" alt="..." />
-          <div className="card-body">
-            <h5 className="card-title">{comic.title}</h5>
-            <p className="card-text">{comic.description}</p>
-          </div>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">Price</li>
-          </ul>
-          <div className="card-body">
-            <a href="#" className="card-link">
-              Card link
-            </a>
+  let renderedComics = comics
+    .sort(() => .5 - Math.random())
+    .slice(0, 20)
+    .map((comic) => {
+      return (
+        <div className="col">
+          <div className="card" style={{ width: 18 + "rem" }}>
+            <img src={comic.thumbnail} className="card-img-top" alt="..." />
+            <div className="card-body">
+              <h5 className="card-title">{comic.title}</h5>
+              <p className="card-text">{comic.description}</p>
+            </div>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">Price</li>
+            </ul>
+            <div className="card-body">
+              <a href="#" className="btn btn-dark m-2">
+                Favorite
+              </a>
+              <a href="#" className="btn btn-dark m-2">
+                Add to Cart
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    );
-  });
+      );
+    });
 
   return (
     <div>
