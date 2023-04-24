@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import axios from "axios";
+import { useGlobalState } from "../context/GlobalState";
+import Comic from "./Comic";
 // import './css/style.css';
 // import backgroundImg from 'public/marvel_display_img2.jpg';
 
 function Comics() {
   const [comics, setComics] = useState([]);
-  const [favorites, setFavorites] = useState({});
+  const [favorites, setFavorites] = useState([]);
+  const [state] = useGlobalState();
+  const [seriesFilter, setSeriesFilter] = useState("");
 
-  const handleClick = () => {
-    setFavorites({ title: "", description: "" });
+  const handleClick = (comicId) => {
+    let newFavs = [...favorites, comicId];
+    setFavorites(newFavs);
+    axios.patch(
+      `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/`,
+      { favorite_comics: newFavs }
+    );
   };
   useEffect(() => {
     axios
@@ -20,6 +29,16 @@ function Comics() {
         setComics(response.data);
       })
       .catch((error) => console.error(error));
+
+    if (state.currentUser) {
+      axios
+        .get(
+          `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/`
+        ) // may need a new port link per project reload
+        .then((response) => {
+          setFavorites(response.data.favorite_comics.map((c) => c.id));
+        });
+    }
   }, []);
   // console.log(comics);
 
@@ -46,38 +65,37 @@ function Comics() {
   //   cardContainer.appendChild(card);
   // }
 
+  const handleChange = async (e) => {
+    axios
+      .get(
+        `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/comics/?q=${e.target.value}`
+      ) // may need a new port link per project reload
+      .then((response) => {
+        setComics(response.data);
+      })
+      .catch((error) => console.error(error));
+  };
+
   let renderedComics = comics
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 20)
+    // .sort(() => 0.5 - Math.random())
+    // .slice(0, 20)
+    // .filter(
+    //   (comic) =>
+    //     comic.description &&
+    //     comic.description.toLowerCase().includes(seriesFilter)
+    // )
     .map((comic) => {
-      return (
-        <div className="col">
-          <div className="card" style={{ width: 18 + "rem" }}>
-            <img src={comic.thumbnail} className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">{comic.title}</h5>
-              <p className="card-text">{comic.description}</p>
-            </div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">Price</li>
-            </ul>
-            <div className="card-body">
-              <a href="#" className="btn btn-dark m-2" onClick={handleClick}>
-                Favorite
-              </a>
-              <a href="#" className="btn btn-dark m-2">
-                Add to Cart
-              </a>
-            </div>
-          </div>
-        </div>
-      );
+      return <Comic key={comic.id} comic={comic} handleClick={handleClick} />;
     });
 
   return (
     <div>
       <NavBar />
+      <input type="text" onChange={handleChange} />
       <div className="container">
+        <div className="row d-flex m-4 align-items-center">
+          <h1 className="display-1 page-head">Comics</h1>
+        </div>
         <div className="row m-3">{renderedComics}</div>
       </div>
     </div>

@@ -41,6 +41,9 @@ function NavBar() {
             <Link to="/login" className="nav-link" id="login">
               Login
             </Link>
+            <Link to="/cart" className="nav-link">
+              Cart
+            </Link>
           </div>
         </div>
       </div>

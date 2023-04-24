@@ -27,12 +27,21 @@ const Login = () => {
     });
   };
 
+  // if (handleLogin) {
+  //   const logoImg = <img src="./LoggedInLogo.png" />;
+  //   const navLink = document.querySelector("login");
+  //   navLink.innerHTML = logoImg;
+  // }
+
   return (
     <>
       <NavBar />
-      <div className="container mx-auto text-center p-3" id="log_in">
+      <div
+        className="container mx-auto vh-100 text-center p-3 page-head"
+        id="log_in"
+      >
         <h3>Login</h3>
-        <div className="c-form">
+        <div className="c-form m-3">
           <form onSubmit={handleLogin}>
             <div>
               <label htmlFor="username">Username:</label>

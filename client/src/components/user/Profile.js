@@ -10,10 +10,10 @@ const Profile = () => {
       <NavBar />
       <div className="container">
         <div className="row">
-          <h1>{state.currentUser.user_id}</h1>
+          <h1>{state.currentUser?.user_id}</h1>
         </div>
         <div className="row">
-          <h3>Favorites</h3>
+          <h3>{state.currentUser?.username}</h3>
         </div>
       </div>
     </>
