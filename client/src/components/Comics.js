@@ -6,13 +6,18 @@ import axios from "axios";
 
 function Comics() {
   const [comics, setComics] = useState([]);
+  const [favorites, setFavorites] = useState({});
+
+  const handleClick = () => {
+    setFavorites({ title: "", description: "" });
+  };
   useEffect(() => {
-    fetch(
-      "https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/comics/" //may need a new port link per project reload
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setComics(data);
+    axios
+      .get(
+        "https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/comics"
+      ) // may need a new port link per project reload
+      .then((response) => {
+        setComics(response.data);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -42,7 +47,7 @@ function Comics() {
   // }
 
   let renderedComics = comics
-    .sort(() => .5 - Math.random())
+    .sort(() => 0.5 - Math.random())
     .slice(0, 20)
     .map((comic) => {
       return (
@@ -57,7 +62,7 @@ function Comics() {
               <li className="list-group-item">Price</li>
             </ul>
             <div className="card-body">
-              <a href="#" className="btn btn-dark m-2">
+              <a href="#" className="btn btn-dark m-2" onClick={handleClick}>
                 Favorite
               </a>
               <a href="#" className="btn btn-dark m-2">

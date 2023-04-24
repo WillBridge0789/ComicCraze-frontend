@@ -8,8 +8,13 @@ const Profile = () => {
   return (
     <>
       <NavBar />
-      <div>
-        <h1>{state.currentUser.user_id}</h1>
+      <div className="container">
+        <div className="row">
+          <h1>{state.currentUser.user_id}</h1>
+        </div>
+        <div className="row">
+          <h3>Favorites</h3>
+        </div>
       </div>
     </>
   );

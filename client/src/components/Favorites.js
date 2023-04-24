@@ -1,6 +1,10 @@
 import NavBar from "./NavBar";
+import React, { useState } from "react";
 
 function Favorites() {
+  const [favComics, setfavComics] = useState(null);
+  
+
   return (
     <div>
       <NavBar />
