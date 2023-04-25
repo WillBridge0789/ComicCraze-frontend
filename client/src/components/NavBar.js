@@ -1,17 +1,30 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import { useGlobalState } from "../context/GlobalState";
+import { useEffect } from "react";
+import jwtDecode from "jwt-decode";
 
 function NavBar() {
+  const [state, dispatch] = useGlobalState();
+  useEffect(() => {
+    let user = JSON.parse(localStorage.getItem("user"));
+
+    const initialState = {
+      currentUser: user ? jwtDecode(user.access) : null,
+      currentUserToken: user ? user.access : null,
+    };
+
+    dispatch(initialState);
+  }, []);
+
   return (
-    <nav className="navbar navbar-expand-lg bg-subtle" id="top-nav">
+    <nav
+      className="navbar navbar-expand-lg bg-subtle align-items-center"
+      id="top-nav"
+    >
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
-          <img
-            src="./marvel_logo.png"
-            alt="Marvel Logo"
-            width="50"
-            height="24"
-          />
+        <a className="navbar-brand" id="home-logo" href="/">
+          CC
         </a>
         <button
           className="navbar-toggler"
@@ -38,9 +51,15 @@ function NavBar() {
             <Link to="/register" className="nav-link">
               Sign Up!
             </Link>
-            <Link to="/login" className="nav-link" id="login">
-              Login
-            </Link>
+            {state.currentUser && state.currentUser.user_id ? (
+              <Link to="/" className="nav-link" id="logout">
+                Logout
+              </Link>
+            ) : (
+              <Link to="/login" className="nav-link" id="login">
+                Login
+              </Link>
+            )}
             <Link to="/cart" className="nav-link">
               Cart
             </Link>

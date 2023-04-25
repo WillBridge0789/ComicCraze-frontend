@@ -3,6 +3,8 @@ import NavBar from "./NavBar";
 import axios from "axios";
 import { useGlobalState } from "../context/GlobalState";
 import Comic from "./Comic";
+import AOS from "aos";
+import "aos/dist/aos.css";
 // import './css/style.css';
 // import backgroundImg from 'public/marvel_display_img2.jpg';
 
@@ -20,6 +22,15 @@ function Comics() {
       { favorite_comics: newFavs }
     );
   };
+
+  const handleRemove = (comicId) => {
+    axios.delete(
+      `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/delete-favorite/${comicId}`,
+    ).then(() => {
+      setFavorites(favorites.filter(c => c.id !== comicId))
+    })
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -85,18 +96,25 @@ function Comics() {
     //     comic.description.toLowerCase().includes(seriesFilter)
     // )
     .map((comic) => {
-      return <Comic key={comic.id} comic={comic} handleClick={handleClick} />;
+      return <Comic key={comic.id} comic={comic} handleClick={handleClick} handleRemove={handleRemove}/>;
     });
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   return (
     <div>
       <NavBar />
-      <input type="text" onChange={handleChange} />
-      <div className="container">
-        <div className="row d-flex m-4 align-items-center">
-          <h1 className="display-1 page-head">Comics</h1>
+      <div data-aos="fade-left">
+        <input type="text" onChange={handleChange} />
+        <div className="container">
+          <div className="row d-flex m-4 align-items-center">
+            <h1 className="display-1 page-head">Comics</h1>
+            <hr className="line"></hr>
+          </div>
+          <div className="row m-3">{renderedComics}</div>
         </div>
-        <div className="row m-3">{renderedComics}</div>
       </div>
     </div>
   );

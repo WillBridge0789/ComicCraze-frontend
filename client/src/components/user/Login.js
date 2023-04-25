@@ -14,17 +14,17 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    AuthService.login(username, password).then(async (resp) => {
-      let data = jwtDecode(resp.access);
-      await dispatch({
-        currentUserToken: resp.access,
-        currentUser: data,
-      });
-      navigate("/profile");
+    let resp = await AuthService.login(username, password);
+    let data = jwtDecode(resp.access);
+    await dispatch({
+      currentUserToken: resp.access,
+      currentUser: data,
     });
+    navigate("/");
+
   };
 
   // if (handleLogin) {

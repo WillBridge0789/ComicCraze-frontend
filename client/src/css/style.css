@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
+
+#home-logo {
+    font-family: 'Avengeance Mightiest Avenger', 'Cambria', 'Cochin', Georgia, Times, 'Times New Roman', serif;
+    color: red;
+}
+
+.card {
+    margin: 15px;
+}
+
+#home-logo:hover {
+    color: white;
+}
+
 .hero-image {
     z-index: -1;
 }

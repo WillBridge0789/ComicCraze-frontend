@@ -1,15 +1,24 @@
-export default function Comic({ comic, handleClick = null }) {
+export default function Comic({
+  comic,
+  handleClick = null,
+  handleRemove = null,
+}) {
   return (
-    <div className="card mb-3" style={{ maxWidth: "540px" }}>
-      <div className="row g-0 m-4">
-        <div className="col-md-6">
+    <div
+      className="card text-bg-secondary mb-3"
+      style={{ maxWidth: "540px" }}
+      data-aos="fade-up"
+      data-aos-duration="350"
+    >
+      <div className="row g-0">
+        <div className="col-6">
           <img
             src={comic.thumbnail}
-            className="img-fluid rounded-start"
+            className="img-fluid rounded-start m-2"
             alt="..."
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-6">
           <div className="card-body">
             <h5 className="card-title">{comic.title}</h5>
             <p className="card-text">{comic.description}</p>
@@ -26,7 +35,11 @@ export default function Comic({ comic, handleClick = null }) {
               <a href="#" className="btn btn-dark m-1">
                 Add to Cart
               </a>
-              <a href="#" className="btn btn-dark m-1">
+              <a
+                href="#"
+                className="btn btn-dark m-1"
+                onClick={() => handleRemove(comic.id)}
+              >
                 Remove
               </a>
             </div>
