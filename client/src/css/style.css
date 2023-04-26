@@ -6,8 +6,75 @@
     color: red;
 }
 
+/* .background-img1 {
+    background: url(/public/marvel_display_img2.jpg);
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    opacity: 0.9;
+} */
+
+.background-gradient {
+    background-image: linear-gradient(to bottom,white, red, rgb(131, 12, 12) , black);
+}
+
 .card {
     margin: 15px;
+    padding: 0;
+    box-shadow: 5px 5px 10px rgb(48, 47, 47);
+}
+
+.card img {
+    object-fit: cover;
+    height: 100%;
+    margin: 0 !important;
+}
+
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+.title-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#comic-input {
+    background-color: #212529;
+}
+
+.comic-container {
+    /* position: relative; */
+    /* min-height: 100vh; */
+    padding-bottom: 50px;
+}
+
+footer {
+    background-color: #212529;
+    color: white;
+    position: relative;
+    min-height: 35vh;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
 }
 
 #home-logo:hover {
@@ -16,6 +83,8 @@
 
 .hero-image {
     z-index: -1;
+    position: fixed;
+    opacity: 0.4;
 }
 
 .hero-image {
@@ -61,6 +130,14 @@
 
 .navbar-nav .nav-link {
     color: white;
+}
+
+.title {
+    font-family: 'Bangers', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: calc(10vw + 10vh + 2vmin);
+    text-align: center;
+    color: white;
+    text-shadow: 5px 5px rgb(48, 47, 47)
 }
 
 #login {

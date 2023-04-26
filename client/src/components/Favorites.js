@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import React, { useEffect, useState } from "react";
 import { useGlobalState } from "../context/GlobalState";
 import Comic from "./Comic";
+import Footer from "./Footer";
 
 function Favorites() {
   const [favComics, setfavComics] = useState([]);
@@ -36,13 +37,16 @@ function Favorites() {
   return (
     <div>
       <NavBar />
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <h1 className="display-1 page-head">Favorites</h1>
           <hr className="line"></hr>
         </div>
-        <div className="row m-3">{renderedFavs}</div>
+        <div className="background-gradient">
+          <div className="row d-flex justify-content-center">{renderedFavs}</div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
