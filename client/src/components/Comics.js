@@ -6,23 +6,24 @@ import Comic from "./Comic";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Footer from "./Footer";
+import { API_URL } from '../services/auth.constants';
 // import './css/style.css';
 // import backgroundImg from 'public/marvel_display_img2.jpg';
 
+// TODO: LOOK INTO react-spinners FOR THIS PAGE
 function Comics() {
   const [comics, setComics] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [cart, setCart] = useState([]);
   const [state, dispatch] = useGlobalState();
+  const [cart, setCart] = useState(state.cart);
   const [seriesFilter, setSeriesFilter] = useState("");
 
   const addToFavorites = (comicId) => {
     let newFavs = [...favorites, comicId];
     setFavorites(newFavs);
-    axios.patch(
-      `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/`,
-      { favorite_comics: newFavs }
-    );
+    axios.patch(`${API_URL}/users/${state.currentUser.user_id}/`, {
+      favorite_comics: newFavs,
+    });
   };
 
   const addToCart = (comicId) => {
@@ -31,27 +32,30 @@ function Comics() {
       ...state,
       cart: newItem,
     });
-    // axios.patch(
-    //   `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/`,
-    //   { cart_item: newItem }
-    // );
+    setCart(newItem);
+    axios.patch(
+      `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/`,
+      { cart_item: newItem }
+    );
   };
 
-  const handleRemove = (comicId) => {
-    axios
-      .delete(
-        `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/delete-favorite/${comicId}`
-      )
-      .then(() => {
-        setFavorites(favorites.filter((c) => c.id !== comicId));
-      });
-  };
+  // const handleRemove = (comicId) => {
+  //   axios
+  //     .delete(
+  //       `${API_URL}/users/${state.currentUser.user_id}/delete-favorite/${comicId}`
+  //     )
+  //     .then(() => {
+  //       if (favorites.some((c) => c.id === comicId)) {
+  //         setFavorites(favorites.filter((c) => c.id !== comicId));
+  //       } else if (state.cart.some((c) => c.id === comicId)) {
+  //         setCart(cart.filter((c) => c.id !== comicId));
+  //       }
+  //     });
+  // };
 
   useEffect(() => {
     axios
-      .get(
-        "https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/comics"
-      ) // may need a new port link per project reload
+      .get(`${API_URL}/comics`) // may need a new port link per project reload
       .then((response) => {
         setComics(response.data);
       })
@@ -59,11 +63,10 @@ function Comics() {
 
     if (state.currentUser) {
       axios
-        .get(
-          `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/`
-        ) // may need a new port link per project reload
+        .get(`${API_URL}/users/${state.currentUser.user_id}/`) // may need a new port link per project reload
         .then((response) => {
           setFavorites(response.data.favorite_comics.map((c) => c.id));
+          setCart(response.data.cart_item.map((c) => c.id));
         });
     }
   }, []);
@@ -94,9 +97,7 @@ function Comics() {
 
   const handleChange = async (e) => {
     axios
-      .get(
-        `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/comics/?q=${e.target.value}`
-      ) // may need a new port link per project reload
+      .get(`${API_URL}/comics/?q=${e.target.value}`) // may need a new port link per project reload
       .then((response) => {
         setComics(response.data);
       })
@@ -104,8 +105,8 @@ function Comics() {
   };
 
   let renderedComics = comics
-    // .sort(() => 0.5 - Math.random())
-    // .slice(0, 20)
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 50)
     // .filter(
     //   (comic) =>
     //     comic.description &&
@@ -117,7 +118,7 @@ function Comics() {
           key={comic.id}
           comic={comic}
           addToFavorites={addToFavorites}
-          handleRemove={handleRemove}
+          // handleRemove={handleRemove}
           addToCart={addToCart}
         />
       );
@@ -130,19 +131,21 @@ function Comics() {
   return (
     <>
       <NavBar />
-      <div data-aos="fade-left">
-        <div className="p-2" id="comic-input">
-          <input type="text" onChange={handleChange} />
+      <div className="p-2" id="comic-input">
+        <input type="text" onChange={handleChange} />
+      </div>
+      {/* <div className="background-img1"> */}
+      <div className="container-fluid g-0">
+        <div className="row d-flex m-4 align-items-center">
+          <div data-aos="fade-left">
+            <h1 className="display-1 page-head d-flex justify-content-center">
+              Comics
+            </h1>
+          </div>
+          <hr className="line"></hr>
         </div>
-        {/* <div className="background-img1"> */}
-        <div className="container-fluid g-0">
-          <div className="row d-flex m-4 align-items-center">
-            <h1 className="display-1 page-head">Comics</h1>
-            <hr className="line"></hr>
-          </div>
-          <div className="row d-flex justify-content-center background-gradient">
-            {renderedComics}
-          </div>
+        <div className="row d-flex justify-content-center background-gradient">
+          {renderedComics}
         </div>
         {/* </div> */}
       </div>

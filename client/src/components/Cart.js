@@ -9,8 +9,8 @@ import axios from "axios";
 //passed a variable to shopping cart
 
 function Cart() {
-  const [cartItem, setCartItem] = useState([]);
   const [state, dispatch] = useGlobalState();
+  // const [cartItem, setCartItem] = useState(state.cart);
 
   useEffect(() => {
     axios
@@ -23,18 +23,15 @@ function Cart() {
       .catch((error) => console.error(error));
   }, []);
 
-  const handleRemove = (comicId) => {
-    axios
-      .delete(
-        `https://8000-willbridge0-comiccrazeb-ckt42wxy9y8.ws-us95.gitpod.io/users/${state.currentUser.user_id}/delete-favorite/${comicId}`
-      )
-      .then(() => {
-        setCartItem(cartItem.filter((c) => c.id !== comicId));
-      });
+  const removeFromCart = (comicId) => {
+    dispatch({
+      ...state,
+      cart: state.cart.filter((c) => c.id !== comicId),
+    });
   };
-  console.log(cartItem);
+
   let renderedCartItems = state.cart.map((comic) => (
-    <Comic key={comic.id} comic={comic} />
+    <Comic key={comic.id} comic={comic} removeFromCart={removeFromCart} />
   ));
 
   return (

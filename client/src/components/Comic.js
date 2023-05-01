@@ -2,14 +2,15 @@ export default function Comic({
   comic,
   addToFavorites = null,
   addToCart = null,
-  handleRemove = null,
+  removeFromCart = null,
 }) {
+  console.log(comic);
   return (
     <div
       className="card text-bg-light mb-3"
       style={{ maxWidth: "540px" }}
       data-aos="fade-up"
-      data-aos-duration="200"
+      data-aos-duration="150"
     >
       <div className="row d-flex justify-content-center g-0">
         <div className="col-md-6">
@@ -43,7 +44,7 @@ export default function Comic({
               <a
                 href="#"
                 className="btn btn-dark m-1"
-                onClick={() => handleRemove(comic.id)}
+                onClick={() => removeFromCart(comic.id)}
               >
                 Remove
               </a>
