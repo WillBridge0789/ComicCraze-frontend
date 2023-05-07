@@ -39,9 +39,6 @@ function NavBar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            {/* <Link to="/" className="nav-link nav-home">
-              Home
-            </Link> */}
             <Link to="/comics" className="nav-link">
               Comics
             </Link>

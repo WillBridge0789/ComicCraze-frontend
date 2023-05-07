@@ -6,7 +6,6 @@ import "./css/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import Comics from "./components/Comics";
-import Home from "./components/Home";
 import Favorites from "./components/Favorites";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/user/Login";
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/home",
-    element: <Home />,
   },
   {
     path: "/comics",
