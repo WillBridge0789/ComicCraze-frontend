@@ -1,11 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 
-function NavBar() {
+function NavBar({ onComicsSearch = false }) {
   const [state, dispatch] = useGlobalState();
+  const [comicSearchQuery, setComicSearchQuery] = useState('');
+
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("user"));
 
@@ -16,6 +18,16 @@ function NavBar() {
 
     dispatch(initialState);
   }, []);
+
+  function handleSubmit(e) {
+    // Prevent the browser from reloading the page
+    e.preventDefault();
+
+    // Read the form data
+    const form = e.target;
+    const formData = new FormData(form);
+    onComicsSearch(formData.get('comic-search-query'));
+  }
 
   return (
     <nav
@@ -37,11 +49,8 @@ function NavBar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div className="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            {/* <Link to="/" className="nav-link nav-home">
-              Home
-            </Link> */}
             <Link to="/comics" className="nav-link">
               Comics
             </Link>
@@ -64,6 +73,12 @@ function NavBar() {
               Cart
             </Link>
           </div>
+          {onComicsSearch &&
+            <form className="d-flex p-2" id="comic-input" method="post" onSubmit={handleSubmit}>
+              <input name="comic-search-query" className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={(e) => setComicSearchQuery(e.target.value)} value={comicSearchQuery}></input>
+              <button className="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          }
         </div>
       </div>
     </nav>

@@ -4,7 +4,6 @@ export default function Comic({
   addToCart = null,
   removeFromCart = null,
 }) {
-  console.log(comic);
   return (
     <div
       className="card text-bg-light mb-3"
@@ -54,21 +53,4 @@ export default function Comic({
       </div>
     </div>
   );
-}
-{
-  /* // <div className="col">
-    //   <div className="card" style={{ width: 18 + "rem" }}>
-    //     <img src={comic.thumbnail} className="card-img-top" alt="..." />
-    //     <div className="card-body">
-    //       <h5 className="card-title">{comic.title}</h5>
-    //       <p className="card-text">{comic.description}</p>
-    //     </div>
-    //     
-    //      
-    //         
-    //       )}
-    //       
-    //     
-    //   </div>
-    // </div> */
 }

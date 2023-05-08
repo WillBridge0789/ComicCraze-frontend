@@ -7,8 +7,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Footer from "./Footer";
 import { API_URL } from '../services/auth.constants';
-// import './css/style.css';
-// import backgroundImg from 'public/marvel_display_img2.jpg';
 
 // TODO: LOOK INTO react-spinners FOR THIS PAGE
 function Comics() {
@@ -70,7 +68,6 @@ function Comics() {
         });
     }
   }, []);
-  // console.log(comics);
 
   // // Populate the card with the data
   // for (let i = 0; i < 10; i++) {
@@ -88,16 +85,15 @@ function Comics() {
   //       </div>
   //     </div>
   //   );
-  //   console.log(card);
 
   //   // append new card element to document
   //   const cardContainer = document.querySelector(".card-container");
   //   cardContainer.appendChild(card);
   // }
 
-  const handleChange = async (e) => {
+  const handleComicsSearch = async (searchQuery) => {
     axios
-      .get(`${API_URL}/comics/?q=${e.target.value}`) // may need a new port link per project reload
+      .get(`${API_URL}/comics/?q=${searchQuery}`) // may need a new port link per project reload
       .then((response) => {
         setComics(response.data);
       })
@@ -130,11 +126,7 @@ function Comics() {
 
   return (
     <>
-      <NavBar />
-      <div className="p-2" id="comic-input">
-        <input type="text" onChange={handleChange} />
-      </div>
-      {/* <div className="background-img1"> */}
+      <NavBar onComicsSearch={handleComicsSearch} />
       <div className="container-fluid g-0">
         <div className="row d-flex m-4 align-items-center">
           <div data-aos="fade-left">
@@ -147,7 +139,6 @@ function Comics() {
         <div className="row d-flex justify-content-center background-gradient">
           {renderedComics}
         </div>
-        {/* </div> */}
       </div>
       <Footer />
     </>
