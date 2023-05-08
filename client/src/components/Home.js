@@ -12,7 +12,7 @@ function Home() {
       <img
         src="./marvel_display_img4.jpg"
         className="hero-image mh-full gradient-overlay"
-        alt="..."
+        alt="Hero Image"
       />
       <div className="title-wrapper">
         <h1 className="display-1 title centered" data-aos="fade-up">
