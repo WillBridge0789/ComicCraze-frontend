@@ -6,7 +6,9 @@ import Comic from "./Comic";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Footer from "./Footer";
-import { API_URL } from '../services/auth.constants';
+import { API_URL } from "../services/auth.constants";
+import { css } from "@emotion/react";
+import { ScaleLoader } from "react-spinners";
 
 // TODO: LOOK INTO react-spinners FOR THIS PAGE
 function Comics() {
@@ -15,6 +17,13 @@ function Comics() {
   const [state, dispatch] = useGlobalState();
   const [cart, setCart] = useState(state.cart);
   const [seriesFilter, setSeriesFilter] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
 
   const addToFavorites = (comicId) => {
     let newFavs = [...favorites, comicId];
@@ -100,26 +109,39 @@ function Comics() {
       .catch((error) => console.error(error));
   };
 
-  let renderedComics = comics
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 50)
-    // .filter(
-    //   (comic) =>
-    //     comic.description &&
-    //     comic.description.toLowerCase().includes(seriesFilter)
-    // )
-    .map((comic) => {
-      return (
-        <Comic
-          key={comic.id}
-          comic={comic}
-          addToFavorites={addToFavorites}
-          // handleRemove={handleRemove}
-          addToCart={addToCart}
+  let renderedComics = null;
+  if (loading) {
+    renderedComics = (
+      <div className="sweet-loading">
+        <ScaleLoader
+          color={"#ffffff"}
+          loading={loading}
+          css={override}
+          size={150}
         />
-      );
-    });
-
+      </div>
+    );
+  } else {
+    renderedComics = comics
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 50)
+      // .filter(
+      //   (comic) =>
+      //     comic.description &&
+      //     comic.description.toLowerCase().includes(seriesFilter)
+      // )
+      .map((comic) => {
+        return (
+          <Comic
+            key={comic.id}
+            comic={comic}
+            addToFavorites={addToFavorites}
+            // handleRemove={handleRemove}
+            addToCart={addToCart}
+          />
+        );
+      });
+  }
   useEffect(() => {
     AOS.init();
   }, []);

@@ -6,7 +6,8 @@ import jwtDecode from "jwt-decode";
 
 function NavBar({ onComicsSearch = false }) {
   const [state, dispatch] = useGlobalState();
-  const [comicSearchQuery, setComicSearchQuery] = useState('');
+  const [comicSearchQuery, setComicSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -26,7 +27,7 @@ function NavBar({ onComicsSearch = false }) {
     // Read the form data
     const form = e.target;
     const formData = new FormData(form);
-    onComicsSearch(formData.get('comic-search-query'));
+    onComicsSearch(formData.get("comic-search-query"));
   }
 
   return (
@@ -49,9 +50,16 @@ function NavBar({ onComicsSearch = false }) {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+        <div
+          className="collapse navbar-collapse justify-content-between"
+          id="navbarNavAltMarkup"
+        >
           <div className="navbar-nav">
-            <Link to="/comics" className="nav-link">
+            <Link
+              to="/comics"
+              className="nav-link"
+              // onClick={() => setLoading(!loading)}
+            >
               Comics
             </Link>
             <Link to="/favorites" className="nav-link">
@@ -73,12 +81,27 @@ function NavBar({ onComicsSearch = false }) {
               Cart
             </Link>
           </div>
-          {onComicsSearch &&
-            <form className="d-flex p-2" id="comic-input" method="post" onSubmit={handleSubmit}>
-              <input name="comic-search-query" className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={(e) => setComicSearchQuery(e.target.value)} value={comicSearchQuery}></input>
-              <button className="btn btn-outline-success" type="submit">Search</button>
+          {onComicsSearch && (
+            <form
+              className="d-flex p-2"
+              id="comic-input"
+              method="post"
+              onSubmit={handleSubmit}
+            >
+              <input
+                name="comic-search-query"
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                onChange={(e) => setComicSearchQuery(e.target.value)}
+                value={comicSearchQuery}
+              ></input>
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
             </form>
-          }
+          )}
         </div>
       </div>
     </nav>

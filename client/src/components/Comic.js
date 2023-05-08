@@ -16,7 +16,7 @@ export default function Comic({
           <img
             src={comic.thumbnail}
             className="img-fluid rounded-start m-2"
-            alt="..."
+            alt="comic book cover"
           />
         </div>
         <div className="col-md-6">
