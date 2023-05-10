@@ -17,7 +17,7 @@ function Comics() {
   const [state, dispatch] = useGlobalState();
   const [cart, setCart] = useState(state.cart);
   const [seriesFilter, setSeriesFilter] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const override = css`
     display: block;
@@ -46,27 +46,14 @@ function Comics() {
     );
   };
 
-  // const handleRemove = (comicId) => {
-  //   axios
-  //     .delete(
-  //       `${API_URL}/users/${state.currentUser.user_id}/delete-favorite/${comicId}`
-  //     )
-  //     .then(() => {
-  //       if (favorites.some((c) => c.id === comicId)) {
-  //         setFavorites(favorites.filter((c) => c.id !== comicId));
-  //       } else if (state.cart.some((c) => c.id === comicId)) {
-  //         setCart(cart.filter((c) => c.id !== comicId));
-  //       }
-  //     });
-  // };
-
   useEffect(() => {
     axios
       .get(`${API_URL}/comics`) // may need a new port link per project reload
       .then((response) => {
         setComics(response.data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
+      .finally(() => setIsLoading(false));
 
     if (state.currentUser) {
       axios
@@ -78,28 +65,6 @@ function Comics() {
     }
   }, []);
 
-  // // Populate the card with the data
-  // for (let i = 0; i < 10; i++) {
-  //   // loop for 10 entries
-  //   const card = (
-  //     <div className="card">
-  //       <img
-  //         src={data[i].id.thumbnail.props.children[0].props}
-  //         class="card-img-top"
-  //         alt="..."
-  //       />
-  //       <div class="card-body">
-  //         {/* <h5 class="card-title">{data[i].title}</h5>
-  //                 <p class="card-text">{data[i].description}</p> */}
-  //       </div>
-  //     </div>
-  //   );
-
-  //   // append new card element to document
-  //   const cardContainer = document.querySelector(".card-container");
-  //   cardContainer.appendChild(card);
-  // }
-
   const handleComicsSearch = async (searchQuery) => {
     axios
       .get(`${API_URL}/comics/?q=${searchQuery}`) // may need a new port link per project reload
@@ -110,12 +75,12 @@ function Comics() {
   };
 
   let renderedComics = null;
-  if (loading) {
+  if (isLoading) {
     renderedComics = (
       <div className="sweet-loading">
         <ScaleLoader
           color={"#ffffff"}
-          loading={loading}
+          loading={isLoading}
           css={override}
           size={150}
         />
@@ -125,11 +90,6 @@ function Comics() {
     renderedComics = comics
       .sort(() => 0.5 - Math.random())
       .slice(0, 50)
-      // .filter(
-      //   (comic) =>
-      //     comic.description &&
-      //     comic.description.toLowerCase().includes(seriesFilter)
-      // )
       .map((comic) => {
         return (
           <Comic

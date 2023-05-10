@@ -11,15 +11,6 @@ body {
     font-size: xx-large;
 }
 
-/* .background-img1 {
-    background: url(/public/marvel_display_img2.jpg);
-    background-position: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    opacity: 0.9;
-} */
-
 .background-gradient {
     background-image: linear-gradient(to bottom,white, red, rgb(131, 12, 12) , black);
     height: 100%;
@@ -44,13 +35,6 @@ body {
     overflow: hidden;
 }
 
-/* .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
-
 .title-wrapper {
     position: absolute;
     top: 0;
@@ -68,8 +52,6 @@ body {
 }
 
 .comic-container {
-    /* position: relative; */
-    /* min-height: 100vh; */
     padding-bottom: 50px;
 }
 
@@ -181,11 +163,4 @@ form > div {
     background-color: #212529;
 }
 
-/* body {
-    background-image: {backgroundImg};
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: rgba(0, 0, 0, 0.5);
-} */
   
