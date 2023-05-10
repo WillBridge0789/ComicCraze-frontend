@@ -4,6 +4,10 @@
 npx create-react-app app --template file:.template
 ```
 
+## On project spin up:
+1. cd client
+2. npm i
+
 ## Anytime changes made to the frontend:
 
 1. run `npm run build`
