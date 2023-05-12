@@ -38,7 +38,7 @@ const Login = () => {
     <>
       <NavBar />
       <main
-        className="container mx-auto vh-100 text-center p-3 page-head"
+        className="container-fluid vh-100 text-center p-3 page-head"
         id="login"
       >
         <h1>Login</h1>
