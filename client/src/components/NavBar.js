@@ -7,7 +7,6 @@ import jwtDecode from "jwt-decode";
 function NavBar({ onComicsSearch = false }) {
   const [state, dispatch] = useGlobalState();
   const [comicSearchQuery, setComicSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("user"));
@@ -58,7 +57,6 @@ function NavBar({ onComicsSearch = false }) {
             <Link
               to="/comics"
               className="nav-link"
-              // onClick={() => setLoading(!loading)}
             >
               Comics
             </Link>
