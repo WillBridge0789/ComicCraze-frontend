@@ -137,11 +137,6 @@ form > div {
     text-shadow: 5px 5px rgb(48, 47, 47)
 }
 
-#login {
-    display: flex;
-    justify-content: end;
-}
-
 .gradient-overlay {
     position: relative; /* Set the parent element to relative position */
     display: inline-block; /* Set the display property to inline-block to align the image and overlay */
@@ -158,7 +153,7 @@ form > div {
     /* Set the background to a linear gradient that fades from transparent to a semi-transparent black color */
 }
 
-#log_in {
+#login {
     color:white;
     background-color: #212529;
 }

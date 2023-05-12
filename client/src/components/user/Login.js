@@ -31,7 +31,7 @@ const Login = () => {
       <NavBar />
       <div
         className="container mx-auto vh-100 text-center p-3 page-head"
-        id="log_in"
+        id="login"
       >
         <h3>Login</h3>
         <div className="c-form m-3">
