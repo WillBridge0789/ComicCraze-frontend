@@ -29,11 +29,11 @@ const Login = () => {
   return (
     <>
       <NavBar />
-      <div
+      <main
         className="container mx-auto vh-100 text-center p-3 page-head"
         id="login"
       >
-        <h3>Login</h3>
+        <h1>Login</h1>
         <div className="c-form m-3">
           <form onSubmit={handleLogin}>
             <div>
@@ -60,7 +60,7 @@ const Login = () => {
             <input type="submit" value="Sign in" />
           </form>
         </div>
-      </div>
+      </main>
     </>
   );
 };
