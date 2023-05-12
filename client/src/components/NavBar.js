@@ -64,7 +64,7 @@ function NavBar({ onComicsSearch = false }) {
               Favorites
             </Link>
             {state.currentUser && state.currentUser.user_id ? (
-              <Link to="/" className="nav-link" id="logout">
+              <Link to="/" className="nav-link">
                 Logout
               </Link>
             ) : (
