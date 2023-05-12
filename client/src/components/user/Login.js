@@ -34,7 +34,7 @@ const Login = () => {
         id="login"
       >
         <h1>Login</h1>
-        <div className="c-form m-3">
+        <div className="m-3">
           <form onSubmit={handleLogin}>
             <div>
               <label htmlFor="username">Username:</label>
