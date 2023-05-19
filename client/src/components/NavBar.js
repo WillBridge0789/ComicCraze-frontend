@@ -65,17 +65,20 @@ function NavBar({ onComicsSearch = false }) {
             <Link to="/favorites" className="nav-link">
               Favorites
             </Link>
-            <Link to="/register" className="nav-link">
-              Sign Up!
-            </Link>
             {state.currentUser && state.currentUser.user_id ? (
               <Link to="/" className="nav-link" id="logout">
                 Logout
               </Link>
             ) : (
-              <Link to="/login" className="nav-link" id="login">
-                Login
-              </Link>
+              <>
+                <Link to="/register" className="nav-link">
+                  Sign Up!
+                </Link>
+
+                <Link to="/login" className="nav-link" id="login">
+                  Login
+                </Link>
+              </>
             )}
             <Link to="/cart" className="nav-link">
               Cart
