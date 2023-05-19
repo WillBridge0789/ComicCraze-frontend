@@ -23,6 +23,7 @@ export default function Comic({
           <div className="card-body">
             <h5 className="card-title">{comic.title}</h5>
             <p className="card-text">{comic.description}</p>
+            <p className="card-text">Price: {comic.description?.match(/[$]\d+[.]\d\d/) || 'Not Found'}</p>
             <div className="card-body">
               {addToFavorites && (
                 <a
