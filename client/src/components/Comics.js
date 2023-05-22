@@ -8,7 +8,7 @@ import "aos/dist/aos.css";
 import Footer from "./Footer";
 import { API_URL } from "../services/auth.constants";
 import { css } from "@emotion/react";
-import { ScaleLoader } from "react-spinners";
+import { ScaleLoader, GridLoader } from "react-spinners";
 
 // TODO: LOOK INTO react-spinners FOR THIS PAGE
 function Comics() {
@@ -78,11 +78,20 @@ function Comics() {
   if (isLoading) {
     renderedComics = (
       <div className="sweet-loading">
-        <ScaleLoader
+        {/* <ScaleLoader
           color={"#ffffff"}
           loading={isLoading}
           css={override}
           size={150}
+        /> */}
+        <GridLoader
+          height={180}
+          width={180}
+          loading={isLoading}
+          color={"#ffffff"}
+          css={override}
+          ariaLabel="grid-loading"
+          radius={12.5}
         />
       </div>
     );

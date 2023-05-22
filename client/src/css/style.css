@@ -163,4 +163,10 @@ form > div {
     background-color: #212529;
 }
 
-  
+.sweet-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 525px;
+}  
