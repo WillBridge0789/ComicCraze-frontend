@@ -9,7 +9,11 @@ function NavBar({ onComicsSearch = false }) {
   const [state, dispatch] = useGlobalState();
   const [comicSearchQuery, setComicSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(!!state?.currentUser?.user_id);
-  console.log({isLoggedIn});
+  
+  useEffect(() => {
+    setIsLoggedIn(!!state?.currentUser?.user_id);
+  }, [state?.currentUser?.user_id])
+
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("user"));
 
@@ -34,7 +38,7 @@ function NavBar({ onComicsSearch = false }) {
   const handleLogout = async () => {
     AuthService.logout();
     await dispatch(state, {currentUser: null})
-    // setIsLoggedIn(false);
+    setIsLoggedIn(false);
   }
 
   return (
