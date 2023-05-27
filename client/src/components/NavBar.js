@@ -77,6 +77,8 @@ function NavBar({ onComicsSearch = false }) {
             </Link>
             {isLoggedIn ? (
               <Link to="/" className="nav-link" id="logout" onClick={handleLogout}>
+            {state.currentUser && state.currentUser.user_id ? (
+              <Link to="/" className="nav-link">
                 Logout
               </Link>
             ) : (

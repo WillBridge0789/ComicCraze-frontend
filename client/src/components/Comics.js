@@ -10,7 +10,6 @@ import { API_URL } from "../services/auth.constants";
 import { css } from "@emotion/react";
 import { ScaleLoader, GridLoader } from "react-spinners";
 
-// TODO: LOOK INTO react-spinners FOR THIS PAGE
 function Comics() {
   const [comics, setComics] = useState([]);
   const [favorites, setFavorites] = useState([]);
