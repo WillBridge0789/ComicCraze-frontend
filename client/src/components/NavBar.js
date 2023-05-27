@@ -1,14 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGlobalState } from "../context/GlobalState";
 import { useEffect, useState } from "react";
+import AuthService from "../services/auth.service";
 import jwtDecode from "jwt-decode";
 
 function NavBar({ onComicsSearch = false }) {
   const [state, dispatch] = useGlobalState();
   const [comicSearchQuery, setComicSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(!!state?.currentUser?.user_id);
+  console.log({isLoggedIn});
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem("user"));
 
@@ -28,6 +29,12 @@ function NavBar({ onComicsSearch = false }) {
     const form = e.target;
     const formData = new FormData(form);
     onComicsSearch(formData.get("comic-search-query"));
+  }
+
+  const handleLogout = async () => {
+    AuthService.logout();
+    await dispatch(state, {currentUser: null})
+    // setIsLoggedIn(false);
   }
 
   return (
@@ -58,15 +65,14 @@ function NavBar({ onComicsSearch = false }) {
             <Link
               to="/comics"
               className="nav-link"
-              // onClick={() => setLoading(!loading)}
             >
               Comics
             </Link>
             <Link to="/favorites" className="nav-link">
               Favorites
             </Link>
-            {state.currentUser && state.currentUser.user_id ? (
-              <Link to="/" className="nav-link" id="logout">
+            {isLoggedIn ? (
+              <Link to="/" className="nav-link" id="logout" onClick={handleLogout}>
                 Logout
               </Link>
             ) : (

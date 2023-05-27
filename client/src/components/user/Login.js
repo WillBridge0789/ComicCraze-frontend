@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../../context/GlobalState";
 import jwtDecode from "jwt-decode";
 import NavBar from "../NavBar";
-import Profile from "./Profile";
 
 const Login = () => {
   let navigate = useNavigate();
 
-  const [state, dispatch] = useGlobalState();
+  const [, dispatch] = useGlobalState();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,14 +23,7 @@ const Login = () => {
       currentUser: data,
     });
     navigate("/");
-
   };
-
-  // if (handleLogin) {
-  //   const logoImg = <img src="./LoggedInLogo.png" />;
-  //   const navLink = document.querySelector("login");
-  //   navLink.innerHTML = logoImg;
-  // }
 
   return (
     <>

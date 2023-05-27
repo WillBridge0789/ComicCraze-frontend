@@ -19,7 +19,7 @@ export const GlobalProvider = ({ children }) => {
     (state, newValue) => ({ ...state, ...newValue }),
     initialState
   );
-    console.log(state);
+    console.log('state ', state);
   return (
     <GlobalStateContext.Provider value={state}>
       <DispatchStateContext.Provider value={dispatch}>
