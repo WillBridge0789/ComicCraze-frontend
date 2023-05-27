@@ -32,6 +32,7 @@ const Login = () => {
       setLoginError(error);
       setIsLoading(false);
     });
+    navigate("/");
   };
 
   return (
