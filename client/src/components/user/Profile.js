@@ -3,7 +3,7 @@ import { useGlobalState } from "../../context/GlobalState";
 import NavBar from "../NavBar";
 
 const Profile = () => {
-  const [state] = useGlobalState();
+  const [state, dispatch] = useGlobalState();
 
   return (
     <>

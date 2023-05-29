@@ -58,8 +58,8 @@ function Comics() {
       axios
         .get(`${API_URL}/users/${state.currentUser.user_id}/`) // may need a new port link per project reload
         .then((response) => {
-          setFavorites(response?.data?.favorite_comics?.map((c) => c.id) || []);
-          setCart(response?.data?.cart_item?.map((c) => c.id) || []);
+          setFavorites(response.data.favorite_comics.map((c) => c.id));
+          setCart(response.data.cart_item.map((c) => c.id));
         });
     }
   }, []);
