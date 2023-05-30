@@ -1,4 +1,8 @@
-# Awesome Inc Web Developer Bootcamp React Template
+# Comic Craze
+### Purpose
+To show, favorite and purchase a variety of marvel comics
+
+## Awesome Inc Web Developer Bootcamp React Template
 
 ```
 npx create-react-app app --template file:.template
