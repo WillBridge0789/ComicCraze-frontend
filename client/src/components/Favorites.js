@@ -8,7 +8,7 @@ import { API_URL } from '../services/auth.constants';
 
 function Favorites() {
   const [favComics, setfavComics] = useState([]);
-  const [state, dispatch] = useGlobalState();
+  const [state] = useGlobalState();
 
   useEffect(() => {
     axios
@@ -17,7 +17,7 @@ function Favorites() {
         setfavComics(response.data.favorite_comics);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [state.currentUser?.user_id]);
 
   const handleRemove = (comicId) => {
     axios

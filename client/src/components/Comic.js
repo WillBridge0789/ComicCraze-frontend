@@ -26,28 +26,25 @@ export default function Comic({
             <p className="card-text">Price: {comic.description?.match(/[$]\d+[.]\d\d/) || 'Not Found'}</p>
             <div className="card-body">
               {addToFavorites && (
-                <a
-                  href="#"
+                <button
                   className="btn btn-dark m-2"
                   onClick={() => addToFavorites(comic.id)}
                 >
                   Favorite
-                </a>
+                </button>
               )}
-              <a
-                href="#"
+              <button
                 className="btn btn-dark m-1"
                 onClick={() => addToCart(comic)}
               >
                 Add to Cart
-              </a>
-              <a
-                href="#"
+              </button>
+              <button
                 className="btn btn-dark m-1"
                 onClick={() => removeFromCart(comic.id)}
               >
                 Remove
-              </a>
+              </button>
             </div>
           </div>
         </div>

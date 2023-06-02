@@ -14,7 +14,7 @@ function Comics() {
   const [comics, setComics] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [state, dispatch] = useGlobalState();
-  const [cart, setCart] = useState(state.cart);
+  const [, setCart] = useState(state.cart);
   const [isLoading, setIsLoading] = useState(true);
 
   const override = css`
@@ -52,8 +52,10 @@ function Comics() {
       })
       .catch((error) => console.error(error))
       .finally(() => setIsLoading(false));
+  }, []);
 
-    if (state.currentUser) {
+  useEffect(() => {
+    if (state?.currentUser?.user_id) {
       axios
         .get(`${API_URL}/users/${state.currentUser.user_id}/`) // may need a new port link per project reload
         .then((response) => {
@@ -61,7 +63,7 @@ function Comics() {
           setCart(response?.data?.cart_item?.map((c) => c.id) || []);
         });
     }
-  }, []);
+  }, [state?.currentUser?.user_id]);
 
   const handleComicsSearch = async (searchQuery) => {
     axios
