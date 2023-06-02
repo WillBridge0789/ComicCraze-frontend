@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import { API_URL } from "../services/auth.constants";
 import { css } from "@emotion/react";
 import { ScaleLoader, GridLoader } from "react-spinners";
+import Paginate from "./Paginate";
 
 function Comics() {
   const [comics, setComics] = useState([]);
@@ -124,11 +125,13 @@ function Comics() {
               Comics
             </h1>
           </div>
+          <Paginate />
           <hr className="line"></hr>
         </div>
         <div className="row d-flex justify-content-center background-gradient">
           {renderedComics}
         </div>
+        <Paginate />
       </div>
       <Footer />
     </>
