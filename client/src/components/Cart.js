@@ -1,6 +1,6 @@
 import Comic from "./Comic";
 import NavBar from "./NavBar";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useGlobalState } from "../context/GlobalState";
 import axios from "axios";
 

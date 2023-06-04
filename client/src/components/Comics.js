@@ -8,14 +8,13 @@ import "aos/dist/aos.css";
 import Footer from "./Footer";
 import { API_URL } from "../services/auth.constants";
 import { css } from "@emotion/react";
-import { ScaleLoader, GridLoader } from "react-spinners";
+import { GridLoader } from "react-spinners";
 
 function Comics() {
   const [comics, setComics] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [state, dispatch] = useGlobalState();
-  const [cart, setCart] = useState(state.cart);
-  const [seriesFilter, setSeriesFilter] = useState("");
+  const [, setCart] = useState(state.cart);
   const [isLoading, setIsLoading] = useState(true);
 
   const override = css`
@@ -47,26 +46,28 @@ function Comics() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/comics`) // may need a new port link per project reload
+      .get(`${API_URL}/comics`)
       .then((response) => {
         setComics(response.data);
       })
       .catch((error) => console.error(error))
       .finally(() => setIsLoading(false));
+  }, []);
 
-    if (state.currentUser) {
+  useEffect(() => {
+    if (state?.currentUser?.user_id) {
       axios
-        .get(`${API_URL}/users/${state.currentUser.user_id}/`) // may need a new port link per project reload
+        .get(`${API_URL}/users/${state.currentUser.user_id}/`)
         .then((response) => {
-          setFavorites(response.data.favorite_comics.map((c) => c.id));
-          setCart(response.data.cart_item.map((c) => c.id));
+          setFavorites(response?.data?.favorite_comics?.map((c) => c.id) || []);
+          setCart(response?.data?.cart_item?.map((c) => c.id) || []);
         });
     }
-  }, []);
+  }, [state?.currentUser?.user_id]);
 
   const handleComicsSearch = async (searchQuery) => {
     axios
-      .get(`${API_URL}/comics/?q=${searchQuery}`) // may need a new port link per project reload
+      .get(`${API_URL}/comics/?q=${searchQuery}`)
       .then((response) => {
         setComics(response.data);
       })
@@ -77,19 +78,13 @@ function Comics() {
   if (isLoading) {
     renderedComics = (
       <div className="sweet-loading">
-        {/* <ScaleLoader
-          color={"#ffffff"}
-          loading={isLoading}
-          css={override}
-          size={150}
-        /> */}
         <GridLoader
           height={180}
           width={180}
           loading={isLoading}
           color={"#ffffff"}
           css={override}
-          ariaLabel="grid-loading"
+          aria-label="grid-loading"
           radius={12.5}
         />
       </div>
@@ -104,7 +99,6 @@ function Comics() {
             key={comic.id}
             comic={comic}
             addToFavorites={addToFavorites}
-            // handleRemove={handleRemove}
             addToCart={addToCart}
           />
         );
