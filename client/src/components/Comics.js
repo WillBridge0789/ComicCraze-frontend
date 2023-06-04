@@ -46,7 +46,7 @@ function Comics() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/comics`) // may need a new port link per project reload
+      .get(`${API_URL}/comics`)
       .then((response) => {
         setComics(response.data);
       })
@@ -57,7 +57,7 @@ function Comics() {
   useEffect(() => {
     if (state?.currentUser?.user_id) {
       axios
-        .get(`${API_URL}/users/${state.currentUser.user_id}/`) // may need a new port link per project reload
+        .get(`${API_URL}/users/${state.currentUser.user_id}/`)
         .then((response) => {
           setFavorites(response?.data?.favorite_comics?.map((c) => c.id) || []);
           setCart(response?.data?.cart_item?.map((c) => c.id) || []);
@@ -67,7 +67,7 @@ function Comics() {
 
   const handleComicsSearch = async (searchQuery) => {
     axios
-      .get(`${API_URL}/comics/?q=${searchQuery}`) // may need a new port link per project reload
+      .get(`${API_URL}/comics/?q=${searchQuery}`)
       .then((response) => {
         setComics(response.data);
       })
@@ -78,19 +78,13 @@ function Comics() {
   if (isLoading) {
     renderedComics = (
       <div className="sweet-loading">
-        {/* <ScaleLoader
-          color={"#ffffff"}
-          loading={isLoading}
-          css={override}
-          size={150}
-        /> */}
         <GridLoader
           height={180}
           width={180}
           loading={isLoading}
           color={"#ffffff"}
           css={override}
-          ariaLabel="grid-loading"
+          aria-label="grid-loading"
           radius={12.5}
         />
       </div>
@@ -105,7 +99,6 @@ function Comics() {
             key={comic.id}
             comic={comic}
             addToFavorites={addToFavorites}
-            // handleRemove={handleRemove}
             addToCart={addToCart}
           />
         );
