@@ -8,14 +8,13 @@ import "aos/dist/aos.css";
 import Footer from "./Footer";
 import { API_URL } from "../services/auth.constants";
 import { css } from "@emotion/react";
-import { ScaleLoader, GridLoader } from "react-spinners";
+import { GridLoader } from "react-spinners";
 
 function Comics() {
   const [comics, setComics] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [state, dispatch] = useGlobalState();
   const [cart, setCart] = useState(state.cart);
-  const [seriesFilter, setSeriesFilter] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const override = css`

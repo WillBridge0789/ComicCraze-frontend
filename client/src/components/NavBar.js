@@ -17,7 +17,7 @@ function NavBar({ onComicsSearch = false }) {
     };
 
     dispatch(initialState);
-  }, []);
+  }, [dispatch]);
 
   function handleSubmit(e) {
     // Prevent the browser from reloading the page
@@ -54,10 +54,7 @@ function NavBar({ onComicsSearch = false }) {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
-            <Link
-              to="/comics"
-              className="nav-link"
-            >
+            <Link to="/comics" className="nav-link">
               Comics
             </Link>
             <Link to="/favorites" className="nav-link">
