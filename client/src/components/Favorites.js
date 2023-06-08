@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useGlobalState } from "../context/GlobalState";
 import Comic from "./Comic";
 import Footer from "./Footer";
-import { API_URL } from '../services/auth.constants';
+import { API_URL } from "../services/auth.constants";
 
 function Favorites() {
   const [favComics, setfavComics] = useState([]);
@@ -22,7 +22,7 @@ function Favorites() {
   const handleRemove = (comicId) => {
     axios
       .delete(
-        `${API_URL}/users/${state.currentUser.user_id}/delete-favorite/${comicId}`
+        `${API_URL}/users/${state.currentUser.user_id}/favorites/${comicId}`
       )
       .then(() => {
         setfavComics(favComics.filter((c) => c.id !== comicId));
