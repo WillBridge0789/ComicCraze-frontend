@@ -20,6 +20,7 @@ function Favorites() {
   }, []);
 
   const handleRemove = (comicId) => {
+    // function takes the comicId as a parameter and uses the filter method to create a new array updatedFavComics
     const updatedFavComics = favComics.filter((comic) => comic.id !== comicId);
     setfavComics(updatedFavComics);
     axios
