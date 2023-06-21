@@ -20,5 +20,5 @@ npx create-react-app app --template file:.template
 If the command `firebase` is not found, run `npm install -g firebase-tools`
 
 ## Just in Case:
-1. run `firebase login --no-localhost`
+1. run `sudo firebase login --no-localhost`
 2. Follow steps
